@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Counter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-family: Arial, sans-serif;
+            cursor: pointer;
+            user-select: none;
+            background: black;
+            color: grey;
+        }
+        #count { font-size: 20vw; }
+        #reset { position: fixed; top: 20px; right: 20px; padding: 10px 20px; }
+    </style>
+</head>
+<body onclick="increment()">
+    <div id="count">0</div>
+    <button id="reset" onclick="event.stopPropagation(); reset()">Reset</button>
+    
+    <script>
+        let count = parseInt(localStorage.getItem('count')) || 0;
+        document.getElementById('count').textContent = count;
+        
+        function increment() {
+            count++;
+            document.getElementById('count').textContent = count;
+            localStorage.setItem('count', count);
+        }
+        function reset() {
+            count = 0;
+            document.getElementById('count').textContent = count;
+            localStorage.removeItem('count');
+        }
+    </script>
+</body>
+</html>
